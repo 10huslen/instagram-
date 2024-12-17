@@ -1,21 +1,38 @@
 const Route = require("express");
 const userModel = require("../models/userSchema");
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const userRoute = Route();
 
+userRoute.post("/login", async (req, res) => {
+  const { username, email, userId } = req.body;
+
+})
+
 userRoute.post("/signup", async (req, res) => {
     const { username, password, email, profileimg } = req.body;
-    try {
-    const createdUser = await userModel.create({
-        username, 
-        password,
-        email,
-        profileimg,
-    });
-    res.status(200).json(createdUser);
+    const saltRound = 10;
+try {
+      const hashedPassword = await bcrypt.hash(password, saltRound); 
+      const createdUser = await userModel.create({
+          username, 
+          password: hashedPassword,
+          email,
+          profileimg,
+      });
+     const token = jwt.sign(
+       {
+         userId: createdUser._id,
+         username: createdUser.username,
+       },
+       process.env.JWT_SECRET,
+       { expiresIn: "24h" }
+     );
+     res.send({ user: createdUser, token })
 } catch (error) {
-    console.log(error);
-    throw new Error(error);
+  console.error(error)
+  res.json({ message: `failed to create user`});
 }
 });
 
