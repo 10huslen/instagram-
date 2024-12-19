@@ -1,7 +1,7 @@
 const Route = require("express");
 const userModel = require("../models/userSchema");
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userRoute = Route();
 
