@@ -13,8 +13,9 @@ const PORT = 8080;
 const connectToDb = async () => {
  try {
    await mongoose.connect(process.env.MONGODB_URI);
+   console.log("conn db")
  } catch (error) {
-    res.send(error);
+    console.log(error)
  }
 };
 
