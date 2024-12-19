@@ -11,15 +11,14 @@ const userRoute = Route();
 // })
 
 userRoute.post("/signup", async (req, res) => {
-    const { username, password, email, profileimg } = req.body;
+    const { username, password, email} = req.body;
     const saltRound = 10;
 try {
       const hashedPassword = await bcrypt.hash(password, saltRound); 
       const createdUser = await userModel.create({
           username, 
           password: hashedPassword,
-          email,
-          profileimg,
+          email
       });
      const token = jwt.sign(
        {

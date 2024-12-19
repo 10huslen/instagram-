@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoutes");
@@ -7,6 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const commentRoute = require("./routes/commentRoutes");
 app.use(express.json());
+app.use(cors())
 
 const PORT = 8080;
 
