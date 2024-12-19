@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken')
 
 const userRoute = Route();
 
-userRoute.post("/login", async (req, res) => {
-  const { username, email, userId } = req.body;
-
-})
+// userRoute.post("/login", async (req, res) => {
+//   const { username, email, userId } = req.body;                
+  
+// })
 
 userRoute.post("/signup", async (req, res) => {
     const { username, password, email, profileimg } = req.body;
