@@ -31,7 +31,7 @@ try {
      res.send({ user: createdUser, token })
 } catch (error) {
   console.error(error)
-  res.json({ message: `failed to create user`});
+  res.json({ message: `failed to create user ${error}` });
 }
 });
 
