@@ -1,6 +1,7 @@
 const Route = require("express");
 const commentModel = require("../models/commentSchema");
-
+const PostModel = require("../models/postSchema");
+const authMIddleWare = require("../auth-middleware"); 
 const commentRoute = Route();
 
 commentRoute.post("/post/comment", async (req, res) => {
