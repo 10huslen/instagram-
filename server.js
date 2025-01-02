@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoutes");
 const postRoute = require("./routes/postRoutes");
+const likeRoute = require("./routes/likeRoutes");
 const dotenv = require("dotenv");
 const commentRoute = require("./routes/commentRoutes");
 app.use(express.json());
@@ -23,6 +24,7 @@ const connectToDb = async () => {
 app.use("",userRoute);
 app.use("", postRoute);
 app.use("", commentRoute);
+app.use("", likeRoute);
 connectToDb();
 
 app.listen(PORT, console.log(`running on ${PORT}`));
