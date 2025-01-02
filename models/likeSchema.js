@@ -5,6 +5,6 @@ const likeSchema = new Schema({
   likes: { type: mongoose.Types.ObjectId, ref: "likes"},
 });
 
-const LikeModel = mongoose.model("like", likeSchema);
+const likeModel = mongoose.model("like", likeSchema);
 
-module.exports = LikeModel;
+module.exports = likeModel;

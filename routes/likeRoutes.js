@@ -1,5 +1,6 @@
 const Route = require("express");
 const postModel = require("../models/postSchema");
+const likeModel = require("../models/likeSchema");
 
 const likeRoute = Route();
 
