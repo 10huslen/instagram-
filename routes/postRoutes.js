@@ -30,7 +30,7 @@ postRoute.get("/posts", authMiddleware, async (req, res) => {
 try {
   const posts = await postModel 
   .find()
-  .populate("userid", "username profileimg");
+  .populate("userid", "username profileimage");
   res.json(posts);
 } catch (error) {
   res.status(404).json({message: `failed to get posts, ${error}` })
