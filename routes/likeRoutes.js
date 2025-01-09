@@ -7,7 +7,7 @@ const likeRoute = Route();
 likeRoute.post("/post/dislike", async (req, res) => {
     const { postId, userId } = req.body;
         const dislikedPostResponse = await postModel.findByIdAndUpdate(postId, {
-            $addToSet: {
+            $pull: {
                 likes: userId,
             },
         });
