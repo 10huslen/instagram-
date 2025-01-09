@@ -4,7 +4,7 @@ const PostModel = require("../models/postSchema");
 const authMIddleWare = require("../auth-middleware"); 
 const commentRoute = Route();
 
-commentRoute.post("/post/comment", async (req, res) => {
+commentRoute.post("/comment/", authMIddleWare, async (req, res) => {
 const { postid, userid, comment } = req.body;
 try {
     const com = await commentModel.create({
