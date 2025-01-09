@@ -4,19 +4,25 @@ const likeModel = require("../models/likeSchema");
 
 const likeRoute = Route();
 
+likeRoute.post("", async (req, res) => {
+    const { postId, userId } = req.body;
+        const dislikedPostResponse = await postModel.findByIdAndUpdate(postId, {
+            $addToSet: {
+                likes: userId,
+            },
+        });
+        res.status(200).json(dislikedPostResponse);
+})
+
 likeRoute.post("/post/like", async (req, res) => {
   const { postId, userId } = req.body;
   console.log(postId, userId);
-  try {
     const likedPostResponse = await postModel.findByIdAndUpdate(postId, {
       $addToSet: {
         likes: userId,
       },
     });
     res.status(200).json(likedPostResponse);
-  } catch (error) {
-    res.status(500).json(error);
-  }
 });
 
 module.exports = likeRoute;
