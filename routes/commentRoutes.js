@@ -4,7 +4,7 @@ const postModel = require("../models/postSchema");
 const authMIddleWare = require("../auth-middleware"); 
 const commentRoute = Route();
 
-commentRoute.post("/comment/", authMIddleWare, async (req, res) => {
+commentRoute.post("/comment", authMIddleWare, async (req, res) => {
 const { postid, userid, comment } = req.body;
 try {
     const com = await commentModel.create({
@@ -12,9 +12,9 @@ try {
        userid, 
        comment,
     });
-  await commentModel.findByIdAndUpdate(postid, {
+  await postModel.findByIdAndUpdate(postid, {
     $push: {
-        comment: com._id,
+        comments: com._id,
     },
   });
     res.status(200).json(com)
@@ -25,13 +25,10 @@ try {
 });
 
 commentRoute.get("/post/:postId", async (req, res) => {
-  const { postId } = req.query;
-  const response = await postModel.find(postId).populate({
-    path: "comments",
-    populate: {
-      path: "userId",
-      select: "username profileImage",
-    },
+  const { postId } = req.params;
+  const response = await commentModel.find({postid : postId}).populate({
+    path: "userid",
+    select: "username profileImage",
   });
   res.send(response);
 });
