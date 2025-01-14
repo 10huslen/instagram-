@@ -24,4 +24,17 @@ try {
 }
 });
 
+commentRoute.get("/post/:postId", async (req, res) => {
+  const { postId } = req.query;
+  const response = await postModel.find(postId).populate({
+    path: "comments",
+    populate: {
+      path: "userId",
+      select: "username profileImage",
+    },
+  });
+  res.send(response);
+});
+
+
 module.exports = commentRoute;
