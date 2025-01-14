@@ -24,4 +24,23 @@ try {
 }
 });
 
+commentRoute.get("/comment/", authMIddleWare, async (req, res) => {
+  const comments = async (req, res) => {
+    const { postId } = req.params;
+    try {
+      const comment = await postModel.findById(postId).populate({
+        path: "comment",
+        populate: {
+          path: "userId",
+          select: "username profileImg",
+        },
+      });
+      res.send(comment);
+    } catch (error) {
+      res.send("err");
+      console.log(error);
+    }
+  };
+})
+
 module.exports = commentRoute;
